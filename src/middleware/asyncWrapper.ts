@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import HttpException from "../util/HttpException";
-const asyncWrapper = async (
+import HttpException from "../error/HttpError";
+const asyncWrapper = (
   operation: (req: Request, res: Response, next: NextFunction) => Promise<void>
 ) => {
   return async (req: Request, res: Response, next: NextFunction) => {

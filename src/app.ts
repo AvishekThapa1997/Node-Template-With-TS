@@ -1,9 +1,18 @@
 import express from "express";
-import router from "./route/route";
+import enabledCors from "./middleware/enablesCors";
 import errorMiddleware from "./middleware/errorMiddleware";
 import notFoundMiddleware from "./middleware/404";
+// import "reflect-metadata";  if want to use typeORM
+import "./config/environment/environment";
 const app = express();
-app.use(router);
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+app.use(enabledCors);
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
-app.listen(process.env.PORT || 3000);
+
+export default app;
